@@ -15,3 +15,5 @@ exports.doesExist = async (email) => {
             throw new Error('Database query failed'); 
     }
 }
+
+// Method that validates input types
