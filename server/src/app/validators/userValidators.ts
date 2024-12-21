@@ -2,6 +2,7 @@
 User related validators 
 */
 const Users = require('../models/users')
+const bcrypt = require("bcrypt")
 
 // Method that validates if a user exists or not
 exports.doesExist = async (email) => {
@@ -17,3 +18,13 @@ exports.doesExist = async (email) => {
 }
 
 // Method that validates input types
+
+// Method that validates user password == hashed password
+exports.validatePassword = async (password, hashed_password) => {
+    const match = await bcrypt.compare(password, hashed_password)
+    if (match) {
+        return true;
+    } else {
+        return false;
+    }
+}
