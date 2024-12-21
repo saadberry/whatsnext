@@ -3,6 +3,7 @@ Schema for users
 Users will contain the following fields:
     - name <string>
     - email <string>
+    - password <string>
     - createdAt <datetime>
     - isActive <bool>
 */
