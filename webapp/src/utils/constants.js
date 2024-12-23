@@ -32,5 +32,6 @@ export const SPECIAL_CHARACTERS_REQUIRED = "Password must contain special charac
 // Special characters for password validation
 export const SPECIAL_CHARACTERS = ['!', '#', '@']
 
-// Switch window delay (in ms)
+// Delays (in ms)
 export const SWITCH_WINDOW_DELAY = 1000
+export const REFRESH_NOTIFICATION_DELAY = 3000

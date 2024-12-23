@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { 
   ERROR, SUCCESS, BASE_URL, POST, ERROR_MSG,
   MIN_PASSWORD_LEN, SPECIAL_CHARACTERS, SPECIAL_CHARACTERS_REQUIRED,
-  SIGNUP_SUCCESSFUL, SWITCH_WINDOW_DELAY
+  SIGNUP_SUCCESSFUL, SWITCH_WINDOW_DELAY, REFRESH_NOTIFICATION_DELAY
 } from '../../utils/constants';
 
 export default function SignupPage() {
@@ -21,7 +21,7 @@ export default function SignupPage() {
 
   const showNotification = (message, type = SUCCESS) => {
     setNotification({ message, type });
-    setTimeout(() => setNotification({ message: "", type: "" }), 3000);
+    setTimeout(() => setNotification({ message: "", type: "" }), REFRESH_NOTIFICATION_DELAY);
   };
 
   const handleSubmit = async (e) => {

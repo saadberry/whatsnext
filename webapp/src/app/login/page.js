@@ -6,7 +6,7 @@ This will be our Login page
 import { useState } from 'react';
 import { 
   ERROR, SUCCESS, BASE_URL, POST, ERROR_MSG,
-  LOGIN_SUCCESSFUL, SWITCH_WINDOW_DELAY
+  LOGIN_SUCCESSFUL, SWITCH_WINDOW_DELAY, REFRESH_NOTIFICATION_DELAY
 } from '../../utils/constants';
 
 export default function LoginPage() {
@@ -23,7 +23,7 @@ export default function LoginPage() {
 
   const showNotification = (message, type = SUCCESS) => {
     setNotification({ message, type });
-    setTimeout(() => setNotification({ message: "", type: "" }), 3000);
+    setTimeout(() => setNotification({ message: "", type: "" }), REFRESH_NOTIFICATION_DELAY);
   };
 
   const handleSubmit = async (e) => {
