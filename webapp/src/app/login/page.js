@@ -89,7 +89,7 @@ export default function LoginPage() {
             <input
               type="email"
               id="email"
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-500"
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-black"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -102,7 +102,7 @@ export default function LoginPage() {
             <input
               type="password"
               id="password"
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-black"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
