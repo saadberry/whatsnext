@@ -5,7 +5,8 @@ This will be our Login page
 
 import { useState } from 'react';
 import { 
-  ERROR, SUCCESS, BASE_URL, POST, ERROR_MSG
+  ERROR, SUCCESS, BASE_URL, POST, ERROR_MSG,
+  LOGIN_SUCCESSFUL, SWITCH_WINDOW_DELAY
 } from '../../utils/constants';
 
 export default function LoginPage() {
@@ -53,7 +54,10 @@ export default function LoginPage() {
       // Saving token in localStorage
       localStorage.setItem('jwtToken', jwtToken);
       // Redirect user to /dashboard on successful login
-      window.location.href = '/dashboard'; 
+      showNotification(LOGIN_SUCCESSFUL, SUCCESS)
+      setTimeout(() => {
+        window.location.href = '/dashboard'; 
+      }, SWITCH_WINDOW_DELAY);
     } catch (err) {
       showNotification(ERROR_MSG, ERROR);
     } finally {
@@ -64,15 +68,18 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-black">
       <div className="bg-black-100 p-6 rounded-lg shadow-lg w-full max-w-md">
-      {notification.message && (
-  <div
-    className={`fixed bottom-7 left-4 px-4 py-2 rounded-lg ${
-      notification.type === "success" ? "bg-green-600" : "bg-red-600"
-    } text-white`}
-  >
-    {notification.message}
-  </div>
-)}
+      {/* Render notification */}
+      {
+          notification.message && (
+          <div
+            className={`fixed bottom-7 left-4 px-4 py-2 rounded-lg ${
+              notification.type === "success" ? "bg-green-600" : "bg-red-600"
+            } text-white`}
+          >
+            {notification.message}
+          </div>
+        )
+    }
         <h1 className="text-2xl font-bold text-center mb-4 text-white">Login</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
