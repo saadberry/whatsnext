@@ -31,7 +31,7 @@ exports.checkOwnership = async (userId, recordId) => {
     // Get records by user
     const user_records = await exports.getByUserId(userId);
     // Check if recordId is present in user_records
-    const does_exist = Object.values(user_records).includes(recordId);
+    const does_exist = user_records.find(record => record._id == recordId) !== undefined;
     return does_exist
 }
 
