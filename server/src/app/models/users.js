@@ -3,6 +3,7 @@ Schema for users
 Users will contain the following fields:
     - name <string>
     - email <string>
+    - password <string>
     - createdAt <datetime>
     - isActive <bool>
 */
@@ -19,6 +20,10 @@ const userSchema = new mongoose.Schema({
       unique: true,
       lowercase: true,
     },
+    password: {
+        type: String,
+        required: true,
+      },
     createdAt: {
       type: Date,
       default: Date.now,
