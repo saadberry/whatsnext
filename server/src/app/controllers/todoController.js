@@ -11,10 +11,8 @@ const jwt = require('jsonwebtoken');
 exports.create = async (req, res) => {
     try {
       const userId = req.user["userId"]
-      const { token } = req.body;
-      decoded_token = jwt.decode(token)
-      title = decoded_token["title"]
-      const todo = await todoService.create(userId, title);
+      const { title, description } = req.body;
+      const todo = await todoService.create(userId, title, description);
       res.status(201).json({ message: 'Record created successfully', todo });
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -25,7 +23,6 @@ exports.get = async (req, res) => {
     try {
         const userId = req.user["userId"]
         const todos = await todoService.get(userId);
-        // console.log(todos)
         if (todos) {
           res.status(200).json({ response: {todos} });
         } else {
@@ -39,12 +36,8 @@ exports.get = async (req, res) => {
 exports.update = async (req, res) => {
     try {
       const userId = req.user["userId"]
-      const { token } = req.body;
-      decoded_token = jwt.decode(token)
-      id = decoded_token["id"]
-      title = decoded_token["title"]
-      status = decoded_token["status"]
-      const result = await todoService.update( userId, id, title, status);
+      const { id, title, status, description } = req.body;
+      const result = await todoService.update( userId, id, title, status, description);
       // Raise Exception if user does not own record
       if (result == constants.UNAUTHORIZED) { 
           res.status(constants.UNAUTHORIZED_CODE).json({ error: constants.UNAUTHORIZED_MSG });
@@ -59,10 +52,7 @@ exports.update = async (req, res) => {
   exports.delete = async (req, res) => {
     try {
       const userId = req.user["userId"]
-      const { token } = req.body;
-      decoded_token = jwt.decode(token)
-      console.log(`decoded_token = ${decoded_token}`);
-      id = decoded_token["id"]
+      const { id } = req.body;
       result = await todoService.archive(userId, id);
       if (result == constants.UNAUTHORIZED) { 
         res.status(constants.UNAUTHORIZED_CODE).json({ error: constants.UNAUTHORIZED_MSG });
