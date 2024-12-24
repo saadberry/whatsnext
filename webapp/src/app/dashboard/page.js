@@ -162,6 +162,7 @@ export default function Dashboard() {
       const newTodo = await response.json();
       setTodos((prevTodos) => [...prevTodos, newTodo]);
       setNewTask('');
+      setNewTaskDescription('');
       setShowAddForm(false);
       showNotification(SUCCESSFUL_POST, SUCCESS);
       fetchTodos()
