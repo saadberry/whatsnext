@@ -61,3 +61,19 @@ Endpoint handling Todo deletion
 Expects the following parameters:
   - Id of record
 ```
+
+## Deployment 
+- The server is hosted on Railway
+- The webapp is hosted on Vercel
+- For both deployments, the following process was done:
+     - Connect GH repo to the respsective services
+     - Configure directory
+     - Once that's done, any subsequent push to the respective directories would trigger re-deployment
+- The database is hosted on Railway as well
+   - Connecting to DB from server:
+       - Create Mongo project
+       - Use Set `MONGO_URI` in variables of server to `PUBLIC_URL` of DB
+
+## Design considerations
+- The app is intentionally designed with simplicity in mind to minimize distractions, in hopes to allow users to focus on the core functionality, helping them complete their tasks.
+- The title: "What's next?" aims to keep the user pushing, constantly asking themselves, "what's next?" 
