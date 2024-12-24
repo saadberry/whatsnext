@@ -3,11 +3,11 @@ Dashboard page for user
 */
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { 
   ERROR, ERROR_MSG, SUCCESS, SUCCESSFUL_POST, 
-  SUCCESSFUL_UPDATE, SUCCESSFUL_DELETE 
+  SUCCESSFUL_UPDATE, SUCCESSFUL_DELETE, BASE_URL
 } from '../../utils/constants';
 
 
@@ -34,12 +34,11 @@ export default function Dashboard() {
     setJwtToken(token);
   }, []);
 
-  if (!jwtToken) {return "Unauthorized"}
-
   // Fetch todos from the server
-  const fetchTodos = async () => {
+  const fetchTodos = useCallback(async () => {
+    if (!jwtToken) return;
     try {
-      const response = await fetch('http://localhost:7111/v1/api/todo', {
+      const response = await fetch(`${BASE_URL}/todo`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -67,11 +66,11 @@ export default function Dashboard() {
       showNotification(ERROR_MSG, ERROR);
       console.error(err);
     }
-  };
+  }, [jwtToken]);
 
   useEffect(() => {
     fetchTodos();
-  }, []);
+  }, [jwtToken, fetchTodos]);
 
   // Handle marking a todo as completed
   const deleteRecord = async (todo) => {
@@ -81,7 +80,7 @@ export default function Dashboard() {
       console.log(`payload=>${JSON.stringify(payload)}`)
 
       // todo: fix API
-      const response = await fetch(`http://localhost:7111/v1/api/todo/`, {
+      const response = await fetch(`${BASE_URL}/todo`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -119,7 +118,7 @@ export default function Dashboard() {
       const payload = { ...selectedTodo  };
       console.log(`payload=>${JSON.stringify(payload)}`)
       // todo: fix API
-      const response = await fetch(`http://localhost:7111/v1/api/todo/`, {
+      const response = await fetch(`${BASE_URL}/todo`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -147,7 +146,7 @@ export default function Dashboard() {
     try {
       const taskPayload = { title: newTask, description: newTaskDescription, token: jwtToken };
       console.log(`taskPayload=>${JSON.stringify(taskPayload)}`)
-      const response = await fetch('http://localhost:7111/v1/api/todo', {
+      const response = await fetch(`${BASE_URL}/todo`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -171,6 +170,7 @@ export default function Dashboard() {
       console.error(err);
     }
   };
+  if (!jwtToken) {return "Unauthorized"}
 
   return (
 
