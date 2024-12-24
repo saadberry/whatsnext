@@ -7,7 +7,8 @@ import { useState, useEffect, useCallback } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { 
   ERROR, ERROR_MSG, SUCCESS, SUCCESSFUL_POST, 
-  SUCCESSFUL_UPDATE, SUCCESSFUL_DELETE, BASE_URL
+  SUCCESSFUL_UPDATE, SUCCESSFUL_DELETE, BASE_URL,
+  TODO_REQUIRED_FIELDS
 } from '../../utils/constants';
 
 
@@ -144,6 +145,7 @@ export default function Dashboard() {
     if (!newTask.trim()) return;
 
     try {
+      if (!newTask || !newTaskDescription) {showNotification(TODO_REQUIRED_FIELDS,  ERROR); return;}
       const taskPayload = { title: newTask, description: newTaskDescription, token: jwtToken };
       console.log(`taskPayload=>${JSON.stringify(taskPayload)}`)
       const response = await fetch(`${BASE_URL}/todo`, {
@@ -208,7 +210,7 @@ export default function Dashboard() {
                     {todo.status}
                   </td>
                   <td className="border border-gray-700 px-4 py-2">
-                    <div className="flex justify-center gap-4">
+                    <div className="flex justify-center gap-8">
                       {/* Trash Icon */}
                       <div
                         title="Delete Record"

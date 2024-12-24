@@ -28,6 +28,7 @@ export const POST = 'POST'
 // Error messages
 export const MIN_PASSWORD_LEN = "Password must be at least 8 characters long."
 export const SPECIAL_CHARACTERS_REQUIRED = "Password must contain special characters!"
+export const TODO_REQUIRED_FIELDS = "Title and Description are required fields"
 
 // Special characters for password validation
 export const SPECIAL_CHARACTERS = ['!', '#', '@']
