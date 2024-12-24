@@ -14,8 +14,9 @@ const PORT = process.env.PORT || 1000;
 
 const app = express()
 app.use(express.json());
+const allowedOrigins = ['http://localhost:3000', 'https://whatsnext-blond.vercel.app'];
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: allowedOrigins,
   methods: ['GET', 'POST', 'PUT', 'DELETE'], 
   credentials: true,
 }));
