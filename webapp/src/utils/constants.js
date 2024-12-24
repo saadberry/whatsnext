@@ -20,7 +20,7 @@ export const LOGIN_SUCCESSFUL = "Successfully logged in!"
 export const SIGNUP_SUCCESSFUL = "Successfully registered!"
 
 // Base URL
-export const BASE_URL = "http://localhost:7111/v1/api"
+export const BASE_URL = "https://whatsnext-production.up.railway.app/v1/api" 
 
 // HTTP METHODS
 export const POST = 'POST'
