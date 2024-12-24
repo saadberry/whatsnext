@@ -27,6 +27,13 @@ export default function SignupPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validating email
+     // Validate email ends with .com
+    if (!email.endsWith('.com')) {
+      setError("Please enter a proper email");
+      return;
+    }
+
     // Basic password validation
     // Validating length
     if (password.length < 8) {
