@@ -20,6 +20,7 @@ export default function Dashboard() {
   const [newTaskDescription, setNewTaskDescription] = useState('');
   const [selectedTodo, setSelectedTodo] = useState(null);
   const [notification, setNotification] = useState({ message: "", type: "" });
+  const [jwtToken, setJwtToken] = useState(null);
 
   const showNotification = (message, type = "success") => {
     setNotification({ message, type });
@@ -28,7 +29,11 @@ export default function Dashboard() {
   };
 
   // Getting jwtToken from local storage
-  const jwtToken = localStorage.getItem("jwtToken");
+  useEffect(() => {
+    const token = localStorage.getItem("jwtToken");
+    setJwtToken(token);
+  }, []);
+
   if (!jwtToken) {return "Unauthorized"}
 
   // Fetch todos from the server
